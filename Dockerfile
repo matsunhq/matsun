@@ -8,7 +8,7 @@ RUN --mount=type=bind,source=./,target=/matsun-API \
     CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
     go build -o /bin/main
 
-FROM alpine:3.10
+FROM alpine:3.10.2
 
 RUN apk add --no-cache ca-certificates
 
