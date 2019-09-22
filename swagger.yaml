@@ -353,7 +353,7 @@ definitions:
         type: 'string'
       displayName:
         type: 'string'
-      image:
+      icon:
         type: 'string'
       email:
         type: "string"
