@@ -349,22 +349,18 @@ definitions:
     properties:
       id:
         type: "integer"
-      name:
+      accountName:
         type: 'string'
-        description: '表示名'
-      UserName:
+      displayName:
         type: 'string'
-        description: 'アカウント名（インスタで検索等で使用される名前）'
       image:
         type: 'string'
-        description: 'プロフィール画像'
       email:
         type: "string"
       password:
         type: "string"
       phoneNumber:
         type: "integer"
-        description: '電話番号'
   Follow:
       type: 'object'
       properties:
@@ -374,4 +370,4 @@ definitions:
           $ref: '#/definitions/User'
         Followed:
           $ref: '#/definitions/User'
-        
+
