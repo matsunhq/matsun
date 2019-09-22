@@ -331,8 +331,8 @@ definitions:
         type: 'integer'
       content:
         type: 'string'
-      user:
-        $ref: '#/definitions/User'
+      user_id:
+        type: 'integer'
   Like:
       type: 'object'
       properties:
