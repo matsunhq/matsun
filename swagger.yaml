@@ -319,10 +319,11 @@ definitions:
     properties:
       id:
         type: 'integer'
-      name:
+      path:
         type: 'string'
-        description: '画像ファイル名'
       created_at:
+        format: 'time_stamp'
+      updated_at:
         format: 'time_stamp'
   Comment:
     type: 'object'
