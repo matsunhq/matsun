@@ -338,12 +338,10 @@ definitions:
       properties:
         id:
           type: 'integer'
-        content:
-          type: 'string'
         user_id:
-          $ref: '#/definitions/User'
+          type: 'integer'
         post_id:
-          $ref: '#/definitions/Post'
+          type: 'integer'
   User:
     type: "object"
     properties:
