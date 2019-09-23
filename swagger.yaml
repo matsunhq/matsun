@@ -295,12 +295,14 @@ definitions:
         type: 'integer'
       text:
         type: 'string'
-      images_id:
-        type: 'integer'
       user_id:
         type: 'integer'
-      comment_id:
-        type: 'integer'
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
   Image:
     type: 'object'
     properties:
