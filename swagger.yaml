@@ -43,13 +43,22 @@ paths:
                     image_id: 1,
                     image_id: 2
                   ]
+                commment_ids:
+                  [
+                    comment_id: 3,
+                    comment_id: 9
+                  ]
               1:
                 id: 2
                 text: 'sample text'
                 image_ids:
-                    [
-                      image_id: 100
-                    ]
+                  [
+                    image_id: 100
+                  ]
+                comment_ids:
+                  [
+                    comment_id: 45
+                  ]
         400:
           description: 'Fail to get posts'
     post:
