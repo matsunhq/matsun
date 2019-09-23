@@ -20,35 +20,38 @@ paths:
       tags:
       - 'posts'
       summary: '投稿記事一覧取得'
-      description: '投稿記事一覧取得'
       operationId: 'getPosts'
       responses:
         200:
-          description: OK
+          description: 'Success'
           schema:
-            type: "array"
+            type: 'array'
             items:
-              type: "object"
+              type: 'object'
               properties:
                 id: 
-                  type: "integer"
-                  format: "int64"
-                images:
-                  type: "array"
-                  items:
-                    type: "string"
-                comments:
-                  type: "array"
-                  items:
-                    properties:
-                      user_name: 
-                        type: "string"
-                        example: "t-kusakabe"
-                      comment:
-                        type: "string"
-                        example:   "乾杯ってどう書くか知ってますか？"
+                  type: 'integer'
+                text:
+                  type: 'string'
+          examples:
+            'application/json':
+              0:
+                id: 1
+                text: 'sample text'
+                image_ids:
+                  [
+                    image_id: 1,
+                    image_id: 2
+                  ]
+              1:
+                id: 2
+                text: 'sample text'
+                image_ids:
+                    [
+                      image_id: 100
+                    ]
         400:
-          description: ""
+          description: 'Fail to get posts'
     post:
       tags:
       - "posts"
@@ -59,11 +62,11 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Post'
-      responses:
-        200:
-          description: 'Success'
-        400:
-          description: "Fail to save a article"
+    responses:
+      200:
+        description: 'Success'
+      400:
+        description: "Fail to save a article"
     put:
       tags: 
         - 'posts'
