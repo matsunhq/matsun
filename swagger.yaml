@@ -27,10 +27,8 @@ paths:
           description: OK
           schema:
             type: "array"
-            description: "この配列内に、POSTオブジェクトの集合が入っている"
             items:
               type: "object"
-              description: "このオブジェクト1つが`post`のオブジェクト"
               properties:
                 id: 
                   type: "integer"
@@ -55,7 +53,6 @@ paths:
       tags:
       - "posts"
       summary: "投稿を保存"
-      description: "投稿を保存"
       parameters:
         - in: 'body'
           name: 'body'
@@ -71,7 +68,6 @@ paths:
       tags: 
         - 'posts'
       summary: '投稿記事の編集'
-      description: '投稿記事の編集'
       parameters:
       - name: 'id'
         in: 'body'
@@ -87,7 +83,6 @@ paths:
       tags: 
       - 'posts'
       summary: '指定のユーザーIDのユーザー情報を削除'
-      description: '指定のユーザーIDのユーザー情報を削除'
       parameters:
       - name: 'id'
         in: 'path'
@@ -103,7 +98,6 @@ paths:
       tags: 
       - 'posts'
       summary: 'ユーザーIDのユーザー情報を取得'
-      description: '指定されたユーザーIDのユーザー情報を取得'
       parameters:
       - name: 'id'
         in: 'path'
@@ -123,12 +117,10 @@ paths:
       tags:
       - "users"
       summary: "ユーザー情報を登録"
-      description: "ユーザー情報を登録"
       operationId: "createUser"
       parameters:
       - in: "body"
         name: "body"
-        description: "Created user object"
         required: true
         schema:
           $ref: "#/definitions/User"
@@ -140,7 +132,6 @@ paths:
       tags:
       - "users"
       summary: "ユーザーログイン"
-      description: "ユーザーログイン"
       operationId: "login"
       parameters:
       - name: "email"
@@ -161,7 +152,6 @@ paths:
       tags:
       - "users"
       summary: "ユーザーログアウト"
-      description: "ユーザーログアウト"
       operationId: "logout"
       parameters:
       - name: id
@@ -177,12 +167,10 @@ paths:
       tags:
       - "users"
       summary: "指定のユーザーIDを取得"
-      description: "指定のユーザーIDを取得"
       operationId: "getUserById"
       parameters:
       - name: 'id'
         in: 'path'
-        description: 'ユーザー表示名'
         required: true
         type: 'integer'
       responses:
@@ -198,12 +186,10 @@ paths:
       tags:
       - "users"
       summary: "ユーザー情報の更新"
-      description: 'ユーザー情報の更新'
       operationId: "updateUser"
       parameters:
       - name: 'id'
         in: 'path'
-        description: 'ユーザーID'
         required: true
         type: "string"
       - in: "body"
@@ -221,7 +207,6 @@ paths:
       tags:
       - "users"
       summary: "ユーザー削除"
-      description: "ユーザー情報を削除"
       operationId: "deleteUser"
       parameters:
       - name: "id"
@@ -238,11 +223,9 @@ paths:
       tags: 
       - 'users'
       summary: 'フォロワー一覧取得'
-      description: 'フォロワー一覧取得' 
       parameters:
       - name: id
         in: 'path'
-        description: 'ユーザーID'
         required: true
         type: 'integer'
       responses:
@@ -259,11 +242,9 @@ paths:
       tags: 
       - 'users'
       summary: 'フォロ一ユーザー覧取得'
-      description: 'フォロ一ユーザー覧取得'
       parameters:
       - name: id
         in: 'path'
-        description: 'ユーザーID'
         required: true
         type: 'integer'
       responses:
@@ -280,16 +261,13 @@ paths:
       tags: 
       - 'users'
       summary: 'フォロ一ユーザー覧取得'
-      description: 'フォロ一ユーザー覧取得'
       parameters:
       - name: id
         in: 'path'
-        description: 'ユーザーID'
         required: true
         type: 'integer'
       - name: following_id
         in: 'path'
-        description: '指定のフォローユーザーID'
         required: true
         type: 'integer'
       responses:
