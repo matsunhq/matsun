@@ -302,18 +302,15 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "integer"
-        format: "int"
+        type: 'integer'
       text:
-        type: "string"
-      images:
-        $ref: '#/definitions/Image'
-      user:
-        $ref: '#/definitions/User'
-      comments:
-        $ref: '#/definitions/Comment'
-      likes:
-        $ref: '#/definitions/Like'
+        type: 'string'
+      images_id:
+        type: 'integer'
+      user_id:
+        type: 'integer'
+      comment_id:
+        type: 'integer'
   Image:
     type: 'object'
     properties:
