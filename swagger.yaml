@@ -70,7 +70,18 @@ paths:
           name: 'body'
           required: true
           schema:
-            $ref: '#/definitions/Post'
+            type: 'object'
+            properties:
+              id:
+                type: 'integer'
+              text:
+                type: 'string'
+              user_id:
+                type: 'integer'
+            example:
+              id: 1
+              text: 'sample text'
+              user_id: 2
     responses:
       200:
         description: 'Success'
