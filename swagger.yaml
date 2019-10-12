@@ -1,0 +1,405 @@
+swagger: "2.0"
+info:
+  description: "It's a application like Instagram that show pictures or movie you took."
+  version: "1.0.0"
+  title: "Matsustagram"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+tags:
+- name: "posts"
+  description: "投稿記事"
+- name: "users"
+  description: "ユーザー"
+schemes:
+- 'https'
+- 'http'
+paths:
+  /posts: 
+    get:
+      tags:
+      - 'posts'
+      summary: '投稿記事一覧取得'
+      operationId: 'getPosts'
+      responses:
+        200:
+          description: 'Success'
+          schema:
+            type: 'array'
+            items:
+              type: 'object'
+              properties:
+                id: 
+                  type: 'integer'
+                text:
+                  type: 'string'
+          examples:
+            'application/json':
+              0:
+                id: 1
+                text: 'sample text'
+                image_ids:
+                  [
+                    image_id: 1,
+                    image_id: 2
+                  ]
+                commment_ids:
+                  [
+                    comment_id: 3,
+                    comment_id: 9
+                  ]
+              1:
+                id: 2
+                text: 'sample text'
+                image_ids:
+                  [
+                    image_id: 100
+                  ]
+                comment_ids:
+                  [
+                    comment_id: 45
+                  ]
+        400:
+          description: 'Fail to get posts'
+    post:
+      tags:
+      - "posts"
+      summary: "投稿を保存"
+      parameters:
+        - in: 'formData'
+          name: 'images[]'
+          type: 'file'
+          description: '複数の画像が選択される場合がある'
+        - in: 'formData'
+          name: 'id'
+          type: 'integer' 
+        - in: 'formData'
+          name: 'text'
+          type: 'string'
+        - in: 'formData'
+          name: 'user_id'
+          type: 'integer'
+    responses:
+      200:
+        description: 'Success to save a post.'
+      400:
+        description: "Fail to save a post."
+    put:
+      tags: 
+        - 'posts'
+      summary: '投稿記事の編集'
+      parameters:
+        - in: 'formData'
+          name: 'images[]'
+          type: 'file'
+          description: '複数の画像が選択される場合がある'
+        - in: 'formData'
+          name: 'id'
+          type: 'integer' 
+        - in: 'formData'
+          name: 'text'
+          type: 'string'
+        - in: 'formData'
+          name: 'user_id'
+          type: 'integer'
+      responses:
+        200:
+          description: 'Success'
+        400:
+          description: 'Fail to update a post'          
+    delete:
+      tags: 
+      - 'posts'
+      summary: '投稿記事の削除'
+      parameters:
+      - name: 'id'
+        in: 'path'
+        required: true
+        type: integer
+      responses:
+        200:
+          description: OK
+        400:
+          description: 'Fail to delete a post'          
+  /posts/{id}:
+    get:
+      tags: 
+      - 'posts'
+      summary: '指定の投稿記事を取得'
+      parameters:
+      - name: 'id'
+        in: 'path'
+        required: true
+        type: integer
+      responses:
+        200:
+          description: 'Success'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Post'
+        400:
+          description: 'Fail to get a post'
+  /users:
+    post:
+      tags:
+      - "users"
+      summary: "ユーザー情報を登録"
+      operationId: "createUser"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+  /users/login:
+    post:
+      tags:
+      - "users"
+      summary: "ユーザーログイン"
+      operationId: "login"
+      parameters:
+      - name: "email"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "password"
+        in: "query"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+        400:
+          description: "Invalid username/password supplied"
+  /users/logout:
+    post:
+      tags:
+      - "users"
+      summary: "ユーザーログアウト"
+      operationId: "logout"
+      parameters:
+      - name: id
+        in: query
+        description: 'ユーザーID'
+        required: true
+        type: integer
+      responses:
+        default:
+          description: "successful operation"
+  /users/{id}:
+    get:
+      tags:
+      - "users"
+      summary: "指定のユーザーIDを取得"
+      operationId: "getUserById"
+      parameters:
+      - name: 'id'
+        in: 'path'
+        required: true
+        type: 'integer'
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: "Invalid username supplied"
+        404:
+          description: "User not found"
+    put:
+      tags:
+      - "users"
+      summary: "ユーザー情報の更新"
+      operationId: "updateUser"
+      parameters:
+      - name: 'id'
+        in: 'path'
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "ユーザー情報"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        400:
+          description: "Invalid user supplied"
+        404:
+          description: "User not found"
+    delete:
+      tags:
+      - "users"
+      summary: "ユーザー削除"
+      operationId: "deleteUser"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Invalid user id supplied"
+        404:
+          description: "User not found"
+  /users/{id}/followed:
+    get:
+      tags: 
+      - 'users'
+      summary: 'フォロワー一覧取得'
+      parameters:
+      - name: id
+        in: 'path'
+        required: true
+        type: 'integer'
+      responses:
+        200:
+          description: 'Success'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Follow'
+        400:
+          description:  'Fail to get followed users'
+  /users/{id}/following:
+    get:
+      tags: 
+      - 'users'
+      summary: 'フォロ一ユーザー覧取得'
+      parameters:
+      - name: id
+        in: 'path'
+        required: true
+        type: 'integer'
+      responses:
+        200:
+          description: 'Success'
+          schema:
+            type: 'array'
+            items:
+              $ref: '#/definitions/Follow'
+        400:
+          description:  'Fail to get followed users'      
+  /users/{id}/following/{following_id}:
+    post:
+      tags: 
+      - 'users'
+      summary: 'フォロ一ユーザー覧取得'
+      parameters:
+      - name: id
+        in: 'path'
+        required: true
+        type: 'integer'
+      - name: following_id
+        in: 'path'
+        required: true
+        type: 'integer'
+      responses:
+        200:
+          description: 'Success'
+        400:
+          description:  'Fail to get followed users'              
+definitions:
+  Post:
+    type: "object"
+    properties:
+      id:
+        type: 'integer'
+      text:
+        type: 'string'
+      user_id:
+        type: 'integer'
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+  Image:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      path:
+        type: 'string'
+      post_id:
+        type: 'integer'
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+  Comment:
+    type: 'object'
+    properties:
+      id:
+        type: 'integer'
+      content:
+        type: 'string'
+      user_id:
+        type: 'integer'
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+  Like:
+      type: 'object'
+      properties:
+        id:
+          type: 'integer'
+        user_id:
+          type: 'integer'
+        post_id:
+          type: 'integer'
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      accountName:
+        type: 'string'
+      displayName:
+        type: 'string'
+      icon:
+        type: 'string'
+      email:
+        type: "string"
+      password:
+        type: "string"
+      phoneNumber:
+        type: "integer"
+      created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+  Follow:
+      type: 'object'
+      properties:
+        id:
+          type: 'integer'
+        Following:
+          $ref: '#/definitions/User'
+        Followed:
+          $ref: '#/definitions/User'
+        created_at:
+        type: date
+        format: 'time_stamp'
+      updated_at:
+        type: date
+        format: 'time_stamp'
+
