@@ -66,34 +66,19 @@ paths:
       - "posts"
       summary: "投稿を保存"
       parameters:
-        - in: 'body'
-          name: 'body'
-          required: true
-          schema:
-            type: 'object'
-            description: '画像データは、Base64でJsonエンコードし送信.'
-            properties:
-              id:
-                type: 'integer'
-              text:
-                type: 'string'
-              user_id:
-                type: 'integer'
-              images:
-                [
-                  image: 'string'
-                ]
-            example:
-              id: 1
-              text: 'sample text'
-              user_id: 2
-              images:
-                [
-                  image: 'WFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz
-                  IHNpbmd1bGFyIHB
-                  dWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRo
-                  ZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4'
-                ]
+        - in: 'formData'
+          name: 'images[]'
+          type: 'file'
+          description: '複数の画像が選択される場合がある'
+        - in: 'formData'
+          name: 'id'
+          type: 'integer' 
+        - in: 'formData'
+          name: 'text'
+          type: 'string'
+        - in: 'formData'
+          name: 'user_id'
+          type: 'integer'
     responses:
       200:
         description: 'Success to save a post.'
@@ -104,16 +89,19 @@ paths:
         - 'posts'
       summary: '投稿記事の編集'
       parameters:
-      - name: 'body'
-        in: 'body'
-        required: true
-        schema:
-          type: 'object'
-          properties:
-            id: 
-              type: 'integer'
-            text:
-              type: 'string'
+        - in: 'formData'
+          name: 'images[]'
+          type: 'file'
+          description: '複数の画像が選択される場合がある'
+        - in: 'formData'
+          name: 'id'
+          type: 'integer' 
+        - in: 'formData'
+          name: 'text'
+          type: 'string'
+        - in: 'formData'
+          name: 'user_id'
+          type: 'integer'
       responses:
         200:
           description: 'Success'
